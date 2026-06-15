@@ -11,9 +11,13 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Routes
+const clientRoutes = require('./routes/clientRoutes');
+app.use('/api/clients', clientRoutes);
+
 // Route de test
 app.get('/', (req, res) => {
-  res.json({ message: 'Aksas Manager API fonctionne ✅' });
+  res.json({ message: 'Aksas Manager API fonctionne ' });
 });
 
 // Démarrer le serveur
