@@ -13,7 +13,14 @@ app.use(express.json());
 
 // Routes
 const clientRoutes = require('./routes/clientRoutes');
+const commandeRoutes = require('./routes/commandeRoutes');
+const stockRoutes = require('./routes/stockRoutes');
+const paiementRoutes = require('./routes/paiementRoutes');
+
 app.use('/api/clients', clientRoutes);
+app.use('/api/commandes', commandeRoutes);
+app.use('/api/stocks', stockRoutes);
+app.use('/api/paiements', paiementRoutes);
 
 // Route de test
 app.get('/', (req, res) => {
