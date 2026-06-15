@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  
+}
+
+// MODULE CLIENTS
+model Client {
+  id          Int      @id @default(autoincrement())
+  nom         String
+  prenom      String?
+  entreprise  String?
+  telephone   String?
+  email       String?  @unique
+  adresse     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  commandes   Commande[]
+}
+
+// MODULE COMMANDES
+model Commande {
+  id          Int      @id @default(autoincrement())
+  reference   String   @unique
+  statut      String   @default("en_attente")
+  clientId    Int
+  client      Client   @relation(fields: [clientId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  paiements   Paiement[]
+}
+
+// MODULE PAIEMENTS
+model Paiement {
+  id          Int      @id @default(autoincrement())
+  montant     Float
+  statut      String   @default("en_attente")
+  commandeId  Int
+  commande    Commande @relation(fields: [commandeId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+// MODULE STOCKS
+model Stock {
+  id          Int      @id @default(autoincrement())
+  designation String
+  quantite    Float
+  unite       String
+  seuilAlerte Float    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
