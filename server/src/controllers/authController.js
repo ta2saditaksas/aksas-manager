@@ -18,7 +18,8 @@ const register = async (req, res) => {
     });
     res.status(201).json({ message: 'Compte créé', id: utilisateur.id });
   } catch (error) {
-    res.status(500).json({ error: 'Erreur serveur' });
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -42,7 +43,8 @@ const login = async (req, res) => {
     );
     res.json({ token, utilisateur: { id: utilisateur.id, nom: utilisateur.nom, email: utilisateur.email, role: utilisateur.role } });
   } catch (error) {
-    res.status(500).json({ error: 'Erreur serveur' });
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
 };
 
