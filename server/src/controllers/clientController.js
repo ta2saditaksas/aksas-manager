@@ -19,7 +19,7 @@ const getClients = async (req, res) => {
         ]
       } : undefined,
       include: {
-        _count: { select: { commandes: true, devis: true } }
+        _count: { select: { commandes: true } }
       },
       orderBy: { createdAt: 'desc' }
     });
