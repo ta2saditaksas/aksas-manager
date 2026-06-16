@@ -1,12 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {
-  getClients,
-  getClient,
-  createClient,
-  updateClient,
-  deleteClient
-} = require('../controllers/clientController');
+const { getClients, getClient, createClient, updateClient, deleteClient } = require('../controllers/clientController');
 
 router.get('/', getClients);
 router.get('/:id', getClient);
