@@ -49,11 +49,27 @@ CREATE TABLE "Stock" (
     CONSTRAINT "Stock_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Utilisateur" (
+    "id" SERIAL NOT NULL,
+    "nom" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "motDePasse" TEXT NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'user',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Utilisateur_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Client_email_key" ON "Client"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Commande_reference_key" ON "Commande"("reference");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Utilisateur_email_key" ON "Utilisateur"("email");
 
 -- AddForeignKey
 ALTER TABLE "Commande" ADD CONSTRAINT "Commande_clientId_fkey" FOREIGN KEY ("clientId") REFERENCES "Client"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
