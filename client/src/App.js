@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
+import Navbar from './components/Navbar';
 import Clients from './pages/Clients';
+import ClientDetail from './pages/ClientDetail';
 import Commandes from './pages/Commandes';
-import Stocks from './pages/Stocks';
-import Paiements from './pages/Paiements';
+import CommandeDetail from './pages/CommandeDetail';
+import Devis from './pages/Devis';
+import Livraisons from './pages/Livraisons';
 
 function App() {
   const [utilisateur, setUtilisateur] = useState(
@@ -23,27 +26,19 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <nav style={{ background: '#1e3a5f', padding: '10px 20px', display: 'flex', gap: 20, alignItems: 'center' }}>
-          <span style={{ color: 'white', fontWeight: 'bold', marginRight: 20 }}>Aksas Manager</span>
-          <Link to="/clients" style={{ color: 'white', textDecoration: 'none' }}>Clients</Link>
-          <Link to="/commandes" style={{ color: 'white', textDecoration: 'none' }}>Commandes</Link>
-          <Link to="/stocks" style={{ color: 'white', textDecoration: 'none' }}>Stocks</Link>
-          <Link to="/paiements" style={{ color: 'white', textDecoration: 'none' }}>Paiements</Link>
-          <span style={{ marginLeft: 'auto', color: 'white' }}>
-            {utilisateur.nom} —
-            <button onClick={handleLogout} style={{ marginLeft: 10, background: 'transparent', color: 'white', border: '1px solid white', cursor: 'pointer', padding: '4px 8px' }}>
-              Déconnexion
-            </button>
-          </span>
-        </nav>
-        <Routes>
-          <Route path="/" element={<Navigate to="/clients" />} />
-          <Route path="/clients" element={<Clients />} />
-          <Route path="/commandes" element={<Commandes />} />
-          <Route path="/stocks" element={<Stocks />} />
-          <Route path="/paiements" element={<Paiements />} />
-        </Routes>
+      <div style={{ minHeight: '100vh', background: '#f5f7fb' }}>
+        <Navbar utilisateur={utilisateur} onLogout={handleLogout} />
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px 16px' }}>
+          <Routes>
+            <Route path="/" element={<Navigate to="/clients" />} />
+            <Route path="/clients" element={<Clients />} />
+            <Route path="/clients/:id" element={<ClientDetail />} />
+            <Route path="/commandes" element={<Commandes />} />
+            <Route path="/commandes/:id" element={<CommandeDetail />} />
+            <Route path="/devis" element={<Devis />} />
+            <Route path="/livraisons" element={<Livraisons />} />
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   );
